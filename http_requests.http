@@ -1,5 +1,96 @@
-### GET request to example server
-GET https://examples.http-client.intellij.net/get
-    ?generated-in=IntelliJ IDEA
+
+# curl -X POST
+#  https://restful-booker.herokuapp.com/auth
+#  -H 'Content-Type: application/json'
+#  -d '{
+#    "username" : "admin",
+#    "password" : "password123"
+#}'
+POST https://restful-booker.herokuapp.com/auth
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "password123"
+}
 
 ###
+
+
+
+# curl -i https://restful-booker.herokuapp.com/booking/1
+GET https://restful-booker.herokuapp.com/booking/1
+
+###
+# curl -i https://restful-booker.herokuapp.com/booking
+GET https://restful-booker.herokuapp.com/booking
+
+###
+
+# curl -X PUT
+#  https://restful-booker.herokuapp.com/booking/1
+#  -H 'Content-Type: application/json'
+#  -H 'Accept: application/json'
+#  -H 'Cookie: token=abc123'
+#  -d '{
+#    "firstname" : "James",
+#    "lastname" : "Brown",
+#    "totalprice" : 111,
+#    "depositpaid" : true,
+#    "bookingdates" : {
+#        "checkin" : "2018-01-01",
+#        "checkout" : "2019-01-01"
+#    },
+#    "additionalneeds" : "Breakfast"
+#}'
+PUT https://restful-booker.herokuapp.com/booking/1
+Accept: application/json
+Cookie: token=0f166c65a080458
+Content-Type: application/json
+
+{
+  "firstname": "Kareem",
+  "lastname": "Mohamed",
+  "totalprice": 3000,
+  "depositpaid": true,
+  "bookingdates": {
+    "checkin": "2018-01-01",
+    "checkout": "2019-01-01"
+  },
+  "additionalneeds": "Breakfast"
+}
+
+###
+
+# curl -X PATCH
+#  https://restful-booker.herokuapp.com/booking/1
+#  -H 'Content-Type: application/json'
+#  -H 'Accept: application/json'
+#  -H 'Cookie: token=abc123'
+#  -d '{
+#    "firstname" : "James",
+#    "lastname" : "Brown"
+#}'
+PATCH https://restful-booker.herokuapp.com/booking/1
+Accept: application/json
+Cookie: token=4a6f66ee7091306
+Content-Type: application/json
+
+{
+  "firstname": "Ali",
+  "lastname": "Taha",
+  "totalprice": 3400
+}
+
+###
+# curl -X DELETE
+#  https://restful-booker.herokuapp.com/booking/1
+#  -H 'Content-Type: application/json'
+#  -H 'Cookie: token=abc123'
+DELETE https://restful-booker.herokuapp.com/booking/1
+Cookie: token=b8ed66b8d914f8f
+Content-Type: application/json
+
+
+
+
