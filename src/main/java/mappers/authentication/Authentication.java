@@ -1,4 +1,5 @@
-package booking_apis;
+package mappers.authentication;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder(setterPrefix = "set")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Bookingdates {
-    private String checkin;
-    private String checkout;
+public class Authentication {
+        private String username;
+        private String password;
 }

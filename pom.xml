@@ -10,6 +10,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <allure.version>2.25.0</allure.version>
   </properties>
 
   <dependencies>
@@ -40,6 +41,16 @@
       <scope>test</scope>
     </dependency>
 
+      <dependency>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-rest-assured</artifactId>
+        <version>${allure.version}</version>
+      </dependency>
 
+      <dependency>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-testng</artifactId>
+        <version>${allure.version}</version>
+      </dependency>
   </dependencies>
 </project>

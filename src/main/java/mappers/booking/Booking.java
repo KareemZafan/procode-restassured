@@ -1,4 +1,4 @@
-package booking_apis;
+package mappers.booking;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder(setterPrefix = "set")
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookingBody {
+public class Booking {
     private String firstname;
     private String lastname;
     private long totalprice;

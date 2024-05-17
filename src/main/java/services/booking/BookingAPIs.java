@@ -1,93 +1,60 @@
 package services.booking;
 
-import booking_apis.BookingBody;
+import base_specs.BaseSpecs;
+import config.Config;
 import io.restassured.response.Response;
+import mappers.booking.Booking;
 import services.authentication.AuthenticationAPIs;
 
 import static io.restassured.RestAssured.given;
 
 public class BookingAPIs {
 
-    public static Response createNewBooking(BookingBody bookingbody) {
-        return given().header("Content-Type", "application/json")
-                .body(bookingbody)
-                .baseUri("https://restful-booker.herokuapp.com")
-                .when()
-                .post("/booking")
-                .then()
+    public static Response createNewBooking(Booking booking) {
+        return given()
+                .spec(BaseSpecs.get().build())
+                .body(booking)
                 .log()
                 .all()
-                .extract()
-                .response();
+                .when()
+                .post(Config.BOOKING_ENDPOINT);
     }
 
-    public static Response getBookingIds(){
-        return given().header("Content-Type", "application/json")
-                .baseUri("https://restful-booker.herokuapp.com")
+    public static Response getBookingIds() {
+        return given()
+                .spec(BaseSpecs.get().build())
                 .when()
-                .get("/booking")
-                .then()
-                .log()
-                .all()
-                .extract()
-                .response();
+                .get(Config.BOOKING_ENDPOINT);
     }
 
     public static Response getBookingId(String id) {
-        return given().header("Content-Type", "application/json")
-                .baseUri("https://restful-booker.herokuapp.com")
+        return given()
+                .spec(BaseSpecs.get().build())
                 .when()
-                .get("/booking/"+id)
-                .then()
-                .log()
-                .all()
-                .extract()
-                .response();
+                .get(String.format(Config.BOOKING_ENDPOINT_WITH_ID, id));
     }
 
-    public static Response updateEntireBooking(String id, BookingBody booking) {
-        return given().header("Content-Type", "application/json")
-                .header("Accept","application/json")
-                .cookie("token", AuthenticationAPIs.getAccessToken())
-                .baseUri("https://restful-booker.herokuapp.com")
+    public static Response updateEntireBooking(String id, Booking booking) {
+        return given()
+                .spec(BaseSpecs.get(AuthenticationAPIs.getAccessToken()).build())
                 .body(booking)
                 .when()
-                .put("/booking/" + id)
-                .then()
-                .log()
-                .all()
-                .extract()
-                .response();
+                .put(String.format(Config.BOOKING_ENDPOINT_WITH_ID, id));
     }
 
-    public static Response updateBookingPartially(String id, String requestBody ) {
-        return given().header("Content-Type", "application/json")
-                .header("Accept","application/json")
-                .cookie("token", AuthenticationAPIs.getAccessToken())
-                .baseUri("https://restful-booker.herokuapp.com")
+    public static Response updateBookingPartially(String id, String requestBody) {
+        return given()
+                .spec(BaseSpecs.get(AuthenticationAPIs.getAccessToken()).build())
                 .body(requestBody)
                 .when()
-                .patch("/booking/" + id)
-                .then()
-                .log()
-                .all()
-                .extract()
-                .response();
+                .patch(String.format(Config.BOOKING_ENDPOINT_WITH_ID, id));
     }
 
     public static Response deleteBooking(String id) {
         return given()
-                .header("Content-Type", "application/json")
-                .cookie("token", AuthenticationAPIs.getAccessToken())
-                .baseUri("https://restful-booker.herokuapp.com")
+                .spec(BaseSpecs.get(AuthenticationAPIs.getAccessToken()).build())
                 .when()
-                .delete("/booking/" + id)
-                .then()
-                .log()
-                .all()
-                .extract()
-                .response();
+                .delete(String.format(Config.BOOKING_ENDPOINT_WITH_ID, id));
     }
-
 
 }

@@ -1,23 +1,30 @@
 package services.authentication;
 
+import base_specs.BaseSpecs;
+import config.Config;
+import mappers.authentication.Authentication;
+
 import static io.restassured.RestAssured.given;
 
 public class AuthenticationAPIs {
 
     public static String getAccessToken() {
-        String requestBody = "{\n" +
-                "  \"username\": \"admin\",\n" +
-                "  \"password\": \"password123\"\n" +
-                "}";
-       return given()
-                .header("Content-Type", "application/json")
-                .baseUri("https://restful-booker.herokuapp.com")
-                .body(requestBody)
+        Authentication authentication =
+                Authentication
+                        .builder()
+                        .setUsername(Config.USERNAME)
+                        .setPassword(Config.PASSWORD)
+                        .build();
+
+        return given()
+                .spec(BaseSpecs.get().build())
+                .body(authentication)
                 .when()
-                .post("/auth")
+                .post(Config.AUTHENTICATION_ENDPOINT)
                 .then()
                 .extract()
                 .response()
-                .jsonPath().get("token");
+                .jsonPath()
+                .get("token");
     }
 }
