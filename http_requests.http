@@ -73,12 +73,12 @@ Content-Type: application/json
 #}'
 PATCH https://restful-booker.herokuapp.com/booking/1
 Accept: application/json
-Cookie: token=4a6f66ee7091306
+Cookie: token=95b00d326fb98d8
 Content-Type: application/json
 
 {
-  "firstname": "Ali",
-  "lastname": "Taha",
+  "firstname": "Ail",
+  "lastname": "Kareem",
   "totalprice": 3400
 }
 

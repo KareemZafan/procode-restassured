@@ -1,17 +1,16 @@
 package api_testing;
 
+import io.restassured.response.Response;
 import mappers.booking.Booking;
 import mappers.booking.BookingResponse;
 import mappers.booking.Bookingdates;
-import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import services.authentication.AuthenticationAPIs;
 import services.booking.BookingAPIs;
-
-import static io.restassured.RestAssured.given;
+import validations.Validations;
 
 public class BookingTests {
 
@@ -20,8 +19,8 @@ public class BookingTests {
     private BookingResponse response;
 
     @BeforeMethod
-    void setUp(){
-         requestBody = Booking
+    void setUp() {
+        requestBody = Booking
                 .builder()
                 .setFirstname("Mohamed")
                 .setLastname("Farse")
@@ -31,15 +30,16 @@ public class BookingTests {
                 .setBookingdates(Bookingdates.builder().setCheckin("2020-01-02").setCheckout("2020-03-20").build())
                 .build();
 
-          response= BookingAPIs
-                 .createNewBooking(requestBody)
-                 .then()
-                 .extract()
-                 .response()
-                 .as(BookingResponse.class);
+        response = BookingAPIs
+                .createNewBooking(requestBody)
+                .then()
+                .extract()
+                .response()
+                .as(BookingResponse.class);
 
-        id = response.getBookingid()+"";
+        id = response.getBookingid() + "";
     }
+
     @Test
     void testAuthentication() {
         Assert.assertNotNull(AuthenticationAPIs.getAccessToken());
@@ -47,7 +47,18 @@ public class BookingTests {
 
     @Test
     void testCreatingNewBooking() {
-        Assert.assertTrue(response.getBookingid()>0);
+        Response res = BookingAPIs
+                .createNewBooking(requestBody);
+
+        Validations
+                .assertThat(res)
+                .statusCodeIs(200)
+                .hasJsonSchema("json-schemas/creating_booking_schema.json")
+                .hasValidBookingId()
+                .hasBooking(requestBody);
+
+
+        Assert.assertTrue(response.getBookingid() > 0);
         Assert.assertEquals(response.getBooking(), requestBody);
     }
 
@@ -59,8 +70,8 @@ public class BookingTests {
         Response res = BookingAPIs.getBookingIds();
 
         // Assert
-        Assert.assertEquals(res.statusCode(), 200);
-        Assert.assertTrue(res.body().asString().contains("bookingid"));
+        Validations.assertThat(res).statusCodeIs(200).bodyContains("bookingid");
+
     }
 
     @Test
@@ -70,9 +81,11 @@ public class BookingTests {
         Response res = BookingAPIs.getBookingId(id);
 
         // Assert
-        Assert.assertEquals(res.statusCode(), 200);
-        Assert.assertTrue(response.getBookingid()>0);
-        Assert.assertEquals(response.getBooking(), requestBody);
+        Validations
+                .assertThat(res)
+                .statusCodeIs(200)
+                .hasJsonSchema("json-schemas/booking-schema.json")
+                .bookingIs(requestBody);
     }
 
     @Test
@@ -89,38 +102,43 @@ public class BookingTests {
                 .build();
         //Action
 
-        Response res = BookingAPIs.updateEntireBooking(id,newBooking);
-        Booking updatedBooking = res.then().extract().response().as(Booking.class);
+        Response res = BookingAPIs.updateEntireBooking(id, newBooking);
 
-        // Assert
-        Assert.assertEquals(res.statusCode(), 200);
+        //Assertions
+        Validations.assertThat(res)
+                .statusCodeIs(200)
+                .hasJsonSchema("json-schemas/booking-schema.json")
+                .bookingIs(newBooking);
 
-        Assert.assertEquals(updatedBooking, newBooking);
     }
 
     @Test
     void testUpdatePartialBooking() {
 
-        String requestBody = "{\n" +
+        String requestBody1 = "{\n" +
                 "  \"firstname\": \"Ashraf\",\n" +
                 "  \"lastname\": \"Ahmed\",\n" +
                 "  \"totalprice\": 5900\n" +
                 "}";
         //Action
 
-        Response res = BookingAPIs.updateBookingPartially(id,requestBody);
+        requestBody.setFirstname("Ashraf");
+        requestBody.setLastname("Ahmed");
+        requestBody.setTotalprice(5900);
 
-        // Assert
-        Assert.assertEquals(res.statusCode(), 200);
-        Assert.assertEquals(res.jsonPath().get("firstname"),"Ashraf");
-        Assert.assertEquals(res.jsonPath().get("lastname"),"Ahmed");
-        Assert.assertEquals(res.jsonPath().getInt("totalprice"),5900);
 
+        Response res = BookingAPIs.updateBookingPartially(id, requestBody1);
+
+        Validations
+                .assertThat(res)
+                .statusCodeIs(200)
+                .hasJsonSchema("json-schemas/booking-schema.json")
+                .bookingIs(requestBody);
 
     }
 
     @AfterMethod
-    void tearDown(){
+    void tearDown() {
         BookingAPIs.deleteBooking(id);
     }
 
