@@ -1,0 +1,30 @@
+<div>POST to https://user-management-test.dev.kommunity.projects.kogo4ic.de/v1/private/roles</div>
+
+<h4>Body</h4>
+<div>
+    <pre class="preformated-text">
+{
+    &quot;name&quot;: &quot;api-test-role&quot;,
+    &quot;description&quot;: &quot;For Testing Role&quot;,
+    &quot;composite&quot;: false,
+    &quot;clientRole&quot;: false
+}    </pre>
+</div>
+
+<h4>Headers</h4>
+<div>
+        <div>Accept: application/json</div>
+        <div>Content-Type: application/json</div>
+</div>
+
+
+
+<h4>Curl</h4>
+<div>
+curl -v -X POST &#39;https://user-management-test.dev.kommunity.projects.kogo4ic.de/v1/private/roles&#39; -H &#39;Accept: application/json&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;name&quot;: &quot;api-test-role&quot;,
+    &quot;description&quot;: &quot;For Testing Role&quot;,
+    &quot;composite&quot;: false,
+    &quot;clientRole&quot;: false
+}&#39;
+</div>

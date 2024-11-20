@@ -14,6 +14,14 @@ public class BaseSpecs {
                 .setBaseUri(Config.BASE_URI);
     }
 
+    public static RequestSpecBuilder getForApplicationAndCategories() {
+        return new RequestSpecBuilder()
+                .addFilter((new AllureRestAssured()))
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Accept", "application/json")
+                .setBaseUri(Config.BASE_URI_FOR_APPLICATION_CATEGORY);
+    }
+
     public static RequestSpecBuilder get(String token) {
         return new RequestSpecBuilder()
                 .addFilter(new AllureRestAssured())

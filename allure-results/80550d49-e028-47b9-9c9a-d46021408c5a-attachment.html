@@ -1,0 +1,98 @@
+<div>PATCH to https://api-test.portal.dev.kommunity.projects.kogo4ic.de/v1/applications/73</div>
+
+<h4>Body</h4>
+<div>
+    <pre class="preformated-text">
+{
+    &quot;id&quot;: 0,
+    &quot;name&quot;: &quot;Updated-Application-Name&quot;,
+    &quot;description&quot;: &quot;Updated-Application-Description&quot;,
+    &quot;link&quot;: &quot;api-test-application-link&quot;,
+    &quot;categoryId&quot;: 1,
+    &quot;createdBy&quot;: &quot;Kareem&quot;,
+    &quot;lastModifiedBy&quot;: &quot;Kareem&quot;,
+    &quot;userGroups&quot;: [
+        {
+            &quot;id&quot;: &quot;Application-group-id-1&quot;,
+            &quot;name&quot;: &quot;Application-group-name-1&quot;
+        },
+        {
+            &quot;id&quot;: &quot;Application-id-2&quot;,
+            &quot;name&quot;: &quot;Application-name-2&quot;
+        }
+    ],
+    &quot;roles&quot;: [
+        {
+            &quot;id&quot;: &quot;Application-role-id-1&quot;,
+            &quot;name&quot;: &quot;Application-role-name-1&quot;
+        },
+        {
+            &quot;id&quot;: &quot;Application-role-id-2&quot;,
+            &quot;name&quot;: &quot;Application-role-name-2&quot;
+        }
+    ],
+    &quot;assignedUsers&quot;: [
+        &quot;User-1&quot;,
+        &quot;User-2&quot;
+    ],
+    &quot;imageBase64&quot;: {
+        &quot;name&quot;: &quot;application.png&quot;,
+        &quot;contentType&quot;: &quot;image/png&quot;,
+        &quot;imageData&quot;: &quot;image_url&quot;
+    },
+    &quot;favourite&quot;: false,
+    &quot;active&quot;: false
+}    </pre>
+</div>
+
+<h4>Headers</h4>
+<div>
+        <div>Accept: application/json</div>
+        <div>Content-Type: application/json</div>
+</div>
+
+
+
+<h4>Curl</h4>
+<div>
+curl -v -X PATCH &#39;https://api-test.portal.dev.kommunity.projects.kogo4ic.de/v1/applications/73&#39; -H &#39;Accept: application/json&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;id&quot;: 0,
+    &quot;name&quot;: &quot;Updated-Application-Name&quot;,
+    &quot;description&quot;: &quot;Updated-Application-Description&quot;,
+    &quot;link&quot;: &quot;api-test-application-link&quot;,
+    &quot;categoryId&quot;: 1,
+    &quot;createdBy&quot;: &quot;Kareem&quot;,
+    &quot;lastModifiedBy&quot;: &quot;Kareem&quot;,
+    &quot;userGroups&quot;: [
+        {
+            &quot;id&quot;: &quot;Application-group-id-1&quot;,
+            &quot;name&quot;: &quot;Application-group-name-1&quot;
+        },
+        {
+            &quot;id&quot;: &quot;Application-id-2&quot;,
+            &quot;name&quot;: &quot;Application-name-2&quot;
+        }
+    ],
+    &quot;roles&quot;: [
+        {
+            &quot;id&quot;: &quot;Application-role-id-1&quot;,
+            &quot;name&quot;: &quot;Application-role-name-1&quot;
+        },
+        {
+            &quot;id&quot;: &quot;Application-role-id-2&quot;,
+            &quot;name&quot;: &quot;Application-role-name-2&quot;
+        }
+    ],
+    &quot;assignedUsers&quot;: [
+        &quot;User-1&quot;,
+        &quot;User-2&quot;
+    ],
+    &quot;imageBase64&quot;: {
+        &quot;name&quot;: &quot;application.png&quot;,
+        &quot;contentType&quot;: &quot;image/png&quot;,
+        &quot;imageData&quot;: &quot;image_url&quot;
+    },
+    &quot;favourite&quot;: false,
+    &quot;active&quot;: false
+}&#39;
+</div>

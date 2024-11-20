@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>procode-restassured</artifactId>
+    <artifactId>emeis-backend-testing</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -58,6 +58,12 @@
             <artifactId>json-schema-validator</artifactId>
             <version>5.4.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -77,7 +83,8 @@
                 <version>3.3.1</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <suiteXmlFile>${xmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
                     <parallel>methods</parallel>
                     <threadCount>4</threadCount>
@@ -85,5 +92,12 @@
             </plugin>
         </plugins>
     </build>
+    <repositories>
+        <repository>
+            <id>maven_central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+    </repositories>
 
 </project>

@@ -1,0 +1,42 @@
+<div>POST to https://user-management-test.dev.kommunity.projects.kogo4ic.de/v1/private/users</div>
+
+<h4>Body</h4>
+<div>
+    <pre class="preformated-text">
+{
+    &quot;username&quot;: &quot;api-test-user&quot;,
+    &quot;firstName&quot;: &quot;Api&quot;,
+    &quot;lastName&quot;: &quot;Testing&quot;,
+    &quot;email&quot;: &quot;test@test.com&quot;,
+    &quot;password&quot;: &quot;12345&quot;,
+    &quot;enabled&quot;: true,
+    &quot;otp&quot;: false,
+    &quot;requiredActions&quot;: [
+        &quot;CONFIGURE_TOTP&quot;
+    ]
+}    </pre>
+</div>
+
+<h4>Headers</h4>
+<div>
+        <div>Accept: application/json</div>
+        <div>Content-Type: application/json</div>
+</div>
+
+
+
+<h4>Curl</h4>
+<div>
+curl -v -X POST &#39;https://user-management-test.dev.kommunity.projects.kogo4ic.de/v1/private/users&#39; -H &#39;Accept: application/json&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;username&quot;: &quot;api-test-user&quot;,
+    &quot;firstName&quot;: &quot;Api&quot;,
+    &quot;lastName&quot;: &quot;Testing&quot;,
+    &quot;email&quot;: &quot;test@test.com&quot;,
+    &quot;password&quot;: &quot;12345&quot;,
+    &quot;enabled&quot;: true,
+    &quot;otp&quot;: false,
+    &quot;requiredActions&quot;: [
+        &quot;CONFIGURE_TOTP&quot;
+    ]
+}&#39;
+</div>
